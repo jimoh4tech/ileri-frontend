@@ -5,7 +5,7 @@ import Product from './Product.components';
 import { useQuery } from 'react-query';
 function Products({ filterText }: { filterText: string }) {
 	
-	const { data: products, isLoading, error } = useQuery('products', () =>
+	const { data: products, isLoading, error } = useQuery<Item[]>('products', () =>
 	productsService.getAll()
 	);
 
@@ -39,7 +39,7 @@ function Products({ filterText }: { filterText: string }) {
 	return (
 		<>
 			<Grid gap={gap} my='30px' templateColumns={col}>
-				{products.map((item: Item) => {
+				{products?.map((item: Item) => {
 					if (
 						(item.name.toLowerCase().indexOf(filterText.toLowerCase()) === -1 &&
 							item.category.toLowerCase().indexOf(filterText.toLowerCase()) ===
