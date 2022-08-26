@@ -33,7 +33,6 @@
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
 	},
-	"proxy": "https://ileri-api.herokuapp.com",
 	"eslintConfig": {
 		"extends": [
 			"react-app",
