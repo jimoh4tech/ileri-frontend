@@ -19,22 +19,28 @@ import { UserCartContext } from '../contexts/cart.contexts';
 import { useQuery } from 'react-query';
 
 function Cart() {
-	const [userCart, setUserCart] = useState<CartItemProps[] | undefined>(undefined);
+	const [userCart, setUserCart] = useState<CartItemProps[] | undefined>(
+		undefined
+	);
 	const [subTotal, setSubTotal] = useState<number>(0);
-	
+	const [isEmpty, setIsEmpty] = useState(false);
+
 	const { isLoading, error } = useQuery('cart', () => fetchData());
 	async function fetchData() {
-		const data: CartItemProps[] = await cartService.getCartItems();
-		setUserCart(data);
-		const total = data.reduce((p, c) => p + c.price * c.quantity, 0);
-		setSubTotal(total);
-	};
+		try {
+			const data: CartItemProps[] = await cartService.getCartItems();
+			setUserCart(data);
+			const total = data.reduce((p, c) => p + c.price * c.quantity, 0);
+			setSubTotal(total);
+		} catch (error) {
+			setIsEmpty(true);
+		}
+	}
 
 	useEffect(() => {
 		const total = userCart?.reduce((p, c) => p + c.price * c.quantity, 0);
 		setSubTotal(total || 0);
-	}, [userCart])
-	
+	}, [userCart]);
 
 	const bg = useColorModeValue('#F9F9F9', 'gray.600');
 	if (isLoading)
@@ -57,6 +63,14 @@ function Cart() {
 				</Text>
 			</Flex>
 		);
+		if (isEmpty || userCart?.length === 0)
+			return (
+				<Flex minH={'300px'} justifyContent='center' alignItems='center'>
+					<Text fontWeight={'medium'}>
+						Opps! Cart is empty.
+					</Text>
+				</Flex>
+			);
 	return (
 		<UserCartContext.Provider value={{ userCart, setUserCart }}>
 			<Box
@@ -72,11 +86,12 @@ function Cart() {
 				>
 					<Stack spacing={{ base: '8', md: '10' }} flex='2'>
 						<Heading fontSize='2xl' fontWeight='extrabold'>
-							Shopping Cart ({userCart?.length} item{(userCart?.length || 0) > 1 && 's'})
+							Shopping Cart ({userCart?.length} item
+							{(userCart?.length || 0) > 1 && 's'})
 						</Heading>
 
 						<Stack spacing='6'>
-							{userCart?.map((item: CartItemProps) => (
+							{userCart?.filter(it => it.stocked).map((item: CartItemProps) => (
 								<CartItem key={item.id} {...item} />
 							))}
 						</Stack>

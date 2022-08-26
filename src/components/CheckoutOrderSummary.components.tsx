@@ -6,12 +6,14 @@ import {
 	Spinner,
 	Stack,
 	Text,
+	Link,
 	useColorModeValue,
 } from '@chakra-ui/react';
 import { FaArrowRight } from 'react-icons/fa';
 import CartProductMeta from './CartProductMeta.components';
 import { CartItemProps } from '../interfaces/item.interfaces';
 import { useState } from 'react';
+import { Link  as RouterLink} from 'react-router-dom';
 
 type OrderSummaryItemProps = {
 	label: string;
@@ -35,13 +37,13 @@ function CheckoutOrderSummary({
 	deliveryFee,
 	userCart,
 	isLoading,
-	error
+	error,
 }: {
 	subTotal: number;
 	deliveryFee: number;
-		userCart: CartItemProps[] | undefined;
-		isLoading: boolean;
-		error: any;
+	userCart: CartItemProps[] | undefined;
+	isLoading: boolean;
+	error: any;
 }) {
 	const [isChecked, setIsChecked] = useState(false);
 
@@ -69,16 +71,20 @@ function CheckoutOrderSummary({
 		<Stack spacing='8' width='full'>
 			<Heading size='md'>Order Summary</Heading>
 
-			{userCart?.map((it) => (
-				<CartProductMeta
-					key={it.name}
-					category={it.category}
-					image={it.imageUrl}
-					name={it.name}
-					quantity={it.quantity}
-					price={it.price}
-				/>
-			))}
+			{userCart
+				?.filter((it) => it.stocked)
+				.map((it) => {
+					return (
+						<CartProductMeta
+							key={it.name}
+							category={it.category}
+							image={it.imageUrl}
+							name={it.name}
+							quantity={it.quantity}
+							price={it.price}
+						/>
+					);
+				})}
 			<Stack spacing='10'>
 				<Stack spacing={4}>
 					<OrderSummaryItem label='Subtotal' value={subTotal} />
@@ -102,7 +108,14 @@ function CheckoutOrderSummary({
 			>
 				{' '}
 				<Text fontSize={'sm'}>
-					I agree with the terms of service and refund policy
+					I agree with the{' '}
+					<Link color={'teal'} as={RouterLink} to={'terms-and-conditions'}>
+						Terms and Conditions
+					</Link>{' '}
+					and{' '}
+					<Link color={'teal'} as={RouterLink} to={'return-policy'}>
+						Return &amp; Refund Policy
+					</Link>
 				</Text>
 			</Checkbox>
 			<Button

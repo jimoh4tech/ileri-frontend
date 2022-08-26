@@ -6,7 +6,7 @@ import { UserCartContext } from '../contexts/cart.contexts';
 import cartService from '../services/cart';
 import { CurrentUserContext } from '../contexts/user.contexts';
 
-function QuantitySelect ({
+function QuantitySelect({
 	value,
 	itemId,
 	setUserCart,
@@ -20,18 +20,33 @@ function QuantitySelect ({
 	const [isLoading, setIsLoading] = useState(false);
 
 	async function increaseCartItem() {
-		setIsLoading(true);
-		const cart = await cartService.updateCartItems(itemId, 1);
-		setUserCart(cart);
-		alertTimeout('success', 'Product added sucessfully');
-		setIsLoading(false);
+		try {
+			setIsLoading(true);
+			const cart = await cartService.updateCartItems(itemId, 1);
+			setUserCart(cart);
+			alertTimeout('success', 'Product added sucessfully');
+			setIsLoading(false);
+		} catch (error) {
+			alertTimeout(
+				'error',
+				'Error adding product. Check your internet connection and reload the page'
+			);
+		}
 	}
 	async function decreaseCartItem() {
-		setIsLoading(true);
-		const cart = await cartService.updateCartItems(itemId, -1);
-		setUserCart(cart);
-		alertTimeout('success', 'Item quantity has been updated');
-		setIsLoading(false);
+		try {
+			setIsLoading(true);
+			const cart = await cartService.updateCartItems(itemId, -1);
+			setUserCart(cart);
+			alertTimeout('success', 'Item quantity has been updated');
+			setIsLoading(false);
+			
+		} catch (error) {
+			alertTimeout(
+				'error',
+				'Error removing product. Check your internet connection and reload the page'
+			);
+		}
 	}
 	return (
 		<Flex justifyContent={'space-between'} alignItems='center' minW={'160px'}>
@@ -55,18 +70,26 @@ function QuantitySelect ({
 			</Button>
 		</Flex>
 	);
-};
+}
 
-function CartItem (props: CartItemProps) {
+function CartItem(props: CartItemProps) {
 	const { name, category, quantity, imageUrl, price, id } = props;
 
 	const { setUserCart } = useContext(UserCartContext);
 	const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
 	async function removeCartItem() {
-		const cart = await cartService.removeCartItems(id);
-		setUserCart(cart);
-		alertTimeout('success', 'Product removed sucessfully');
+		try {
+			
+			const cart = await cartService.removeCartItems(id);
+			setUserCart(cart);
+			alertTimeout('success', 'Product removed sucessfully');
+		} catch (error) {
+			alertTimeout(
+				'error',
+				'Error removing product. Check your internet connection and reload the page'
+			);
+		}
 	}
 
 	function alertTimeout(status: string, message: string) {
@@ -139,6 +162,6 @@ function CartItem (props: CartItemProps) {
 			</Flex>
 		</Flex>
 	);
-};
+}
 
 export default CartItem;

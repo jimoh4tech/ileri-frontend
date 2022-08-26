@@ -21,6 +21,12 @@ import AdminUsers from './components/AdminUsers.components';
 import Orders from './components/Orders.components';
 import AdminOrders from './components/AdminOrders.components';
 import Account from './components/Account.components';
+import PrivacyPolicy from './components/PrivacyPolicy.components';
+import TermsAndConditions from './components/TermsAndConditions.components';
+import RefundPolicy from './components/RefundPolicy.components';
+import AboutUs from './components/AboutUs.components';
+import ContactUs from './components/ContactUs.components';
+import Careers from './components/Careers.components';
 
 function App() {
 	const [filterText, setFilterText] = useState('');
@@ -64,6 +70,15 @@ function App() {
 							path='checkout'
 							element={currentUser ? <Checkout /> : <SignIn />}
 						/>
+						<Route path='privacy-policy' element={<PrivacyPolicy />} />
+						<Route
+							path='terms-and-conditions'
+							element={<TermsAndConditions />}
+						/>
+						<Route path='refund-policy' element={<RefundPolicy />} />
+						<Route path='about-us' element={<AboutUs />} />
+						<Route path='contact-us' element={<ContactUs />} />
+						<Route path='careers' element={<Careers />} />
 						<Route
 							path='orders'
 							element={currentUser ? <Orders /> : <SignIn />}

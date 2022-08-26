@@ -48,7 +48,6 @@ function User(userProps: UserAdmin) {
 				setMessage('');
 			}, 2000);
 		} catch (error: any) {
-			console.error(error);
 			setStatus('error');
 			const errMessage: string = error.response.data.error
 				? error.response.data.error
@@ -62,18 +61,19 @@ function User(userProps: UserAdmin) {
 	}
 
 	async function handleDeleteUser() {
-		try {
-			setIsLoading(true);
-			const users = await usersService.deleteUser(user.id);
-			setUsers(users);
-			setIsLoading(false);
-		} catch (error: any) {
-			const errMessage: string = error.response.data.error
-				? error.response.data.error
-				: error.response.data;
-			alert(errMessage);
-			setIsLoading(false);
-		}
+		if (window.confirm('Are you sure you want to delete this user?'))
+			try {
+				setIsLoading(true);
+				const users = await usersService.deleteUser(user.id);
+				setUsers(users);
+				setIsLoading(false);
+			} catch (error: any) {
+				const errMessage: string = error.response.data.error
+					? error.response.data.error
+					: error.response.data;
+				alert(errMessage);
+				setIsLoading(false);
+			}
 	}
 	return (
 		<>

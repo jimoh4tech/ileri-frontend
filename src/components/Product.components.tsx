@@ -60,7 +60,7 @@ function Product(itemFilter: ItemFilter) {
 
 	function handleAddToCart() {
 		if (currentUser) {
-			onOpen()
+			onOpen();
 		} else {
 			navigate('/signin');
 		}
@@ -76,7 +76,10 @@ function Product(itemFilter: ItemFilter) {
 				justifyContent={'space-between'}
 				gap='1'
 			>
-				<Box position='relative'>
+				<Box
+					position='relative'
+					minH={isLessThan500 ? '100px' : '250px'}
+				>
 					<Circle
 						size={isLessThan500 ? '25px' : '40px'}
 						position='absolute'
@@ -92,6 +95,7 @@ function Product(itemFilter: ItemFilter) {
 						alt={item.name}
 						alignSelf='center'
 						w='full'
+						maxH={isLessThan500 ? '150px' : '320px'}
 					/>
 				</Box>
 				<Flex direction={'column'} gap='1' px={'2'}>

@@ -1,6 +1,7 @@
 import {
 	Box,
 	Button,
+	Checkbox,
 	Flex,
 	FormControl,
 	FormErrorMessage,
@@ -17,6 +18,7 @@ import {
 	useMediaQuery,
 } from '@chakra-ui/react';
 import { Field, Formik } from 'formik';
+import { Link as RouterLink } from "react-router-dom";
 import { useContext, useState } from 'react';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
@@ -28,6 +30,7 @@ function SignUp() {
 	const [showPassword, setShowPassword] = useState(false);
 	const [status, setStatus] = useState<'error' | 'success'>();
 	const [message, setMessage] = useState('');
+	const [isChecked, setIsChecked] = useState(false);
 
 	const [isLessThan500] = useMediaQuery('(max-width: 500px)');
 
@@ -43,7 +46,6 @@ function SignUp() {
 			setMessage('Your registration was successful');
 			setTimeout(() => navigate('/'), 2000);
 		} catch (error: any) {
-			console.error(error);
 			setStatus('error');
 			const errMessage: string =
 				error.message === 'Network Error'
@@ -62,7 +64,13 @@ function SignUp() {
 			justify={'center'}
 			bg={useColorModeValue('gray.50', 'gray.800')}
 		>
-			<Stack spacing={8} mx={'auto'} maxW={'lg'} pt={8} px={isLessThan500 ? 2 : 6}>
+			<Stack
+				spacing={8}
+				mx={'auto'}
+				maxW={'lg'}
+				pt={8}
+				px={isLessThan500 ? 2 : 6}
+			>
 				<Stack align={'center'}>
 					<Heading fontSize={'4xl'}>Sign up</Heading>
 					<Text fontSize={'lg'} color={'gray.600'}>
@@ -74,7 +82,7 @@ function SignUp() {
 					rounded={'lg'}
 					bg={useColorModeValue('white', 'gray.700')}
 					boxShadow={'lg'}
-					p={isLessThan500 ? 4: 8}
+					p={isLessThan500 ? 4 : 8}
 				>
 					<Formik
 						initialValues={{
@@ -144,12 +152,38 @@ function SignUp() {
 										<FormErrorMessage>{errors.password}</FormErrorMessage>
 									</FormControl>
 
+									<Checkbox
+										colorScheme={'teal'}
+										isChecked={isChecked}
+										onChange={() => setIsChecked(!isChecked)}
+									>
+										{' '}
+										<Text fontSize={'sm'}>
+											I agree with the{' '}
+											<Link
+												color={'teal'}
+												as={RouterLink}
+												to={'terms-and-conditions'}
+											>
+												Terms and Conditions
+											</Link>{' '}
+											and{' '}
+											<Link
+												color={'teal'}
+												as={RouterLink}
+												to={'privacy-policy'}
+											>
+												Privacy Policy
+											</Link>
+										</Text>
+									</Checkbox>
+
 									<Stack spacing={10} pt={2}>
 										<Button
 											colorScheme={'teal'}
 											type='submit'
 											isLoading={isSubmitting}
-											isDisabled={isSubmitting}
+											isDisabled={!isChecked || isSubmitting}
 										>
 											Sign up
 										</Button>

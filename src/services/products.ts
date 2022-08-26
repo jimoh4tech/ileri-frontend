@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { token } from './auth';
 
-const baseUrl = 'http://localhost:3111/api/v1/items';
+const baseUrl = '/api/v1/items';
 
 const createProduct = async (data: any) => {
 	const res = await axios.post(baseUrl, data, {

@@ -16,8 +16,7 @@ import {
 	ModalCloseButton,
 	ModalHeader,
 	ModalBody,
-	ModalFooter,
-	Button,
+	Link,
 } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
@@ -39,8 +38,19 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
 		</Text>
 	);
 };
-
-function ListItem({ title, value }: { title: string; value: string }) {
+function ListItems({ value, link }: { value: string; link: string }) {
+	const [isLessThan500] = useMediaQuery('(max-width: 500px)');
+	return (
+		<Link
+			as={RouterLink}
+			to={link}
+			fontSize={isLessThan500 ? 'smaller' : 'medium'}
+		>
+			{value}
+		</Link>
+	);
+}
+function ListItem({ title, children }: { title: string; children: ReactNode }) {
 	const { onOpen, onClose, isOpen } = useDisclosure();
 	const [isLessThan500] = useMediaQuery('(max-width: 500px)');
 	return (
@@ -62,15 +72,7 @@ function ListItem({ title, value }: { title: string; value: string }) {
 				<ModalContent>
 					<ModalHeader>{title}</ModalHeader>
 					<ModalCloseButton />
-					<ModalBody>
-						<Text>{value}</Text>
-					</ModalBody>
-
-					<ModalFooter>
-						<Button colorScheme='teal' mr={3} onClick={onClose}>
-							Close
-						</Button>
-					</ModalFooter>
+					<ModalBody>{children}</ModalBody>
 				</ModalContent>
 			</Modal>
 		</>
@@ -108,22 +110,52 @@ const SocialButton = ({
 	);
 };
 
+export const Socials = () => {
+	return (
+		<Stack direction={'row'} spacing={6}>
+			<SocialButton label={'Twitter'} href={'https://twitter.com/ileriJim'}>
+				<FaTwitter />
+			</SocialButton>
+			<SocialButton
+				label={'Facebook'}
+				href={'https://web.facebook.com/profile.php?id=100085211732596'}
+			>
+				<FaFacebook />
+			</SocialButton>
+			<SocialButton
+				label={'Instagram'}
+				href={'https://www.instagram.com/ileri_oluwa_ventures/'}
+			>
+				<FaInstagram />
+			</SocialButton>
+		</Stack>
+	);
+};
+
 export default function Footer() {
 	const product = [
-		{ title: 'Contracts', value: 'I am Contracts' },
-		{ title: 'Delivery Locations', value: 'I am Delivery Locations' },
-		{ title: 'Pricing', value: 'I am Pricing' },
+		{
+			title: 'Contracts',
+			children:
+				'Are you a contractor looking for block constructions on your site? You can reach out to us via the details on our contact page',
+		},
+		{
+			title: 'Delivery Locations',
+			children:
+				'We are striving to expand our delivery market. However, we currently make deliveries in Iba Housing Estate, Igbo Elerin, Agboroko, Ipaye, Peace Estate, Iyana School, Iba Junction, Village, Red Gate, LASU, Post Service.',
+		}
 	];
 	const company = [
-		{ title: 'About Us', value: 'I am About Us' },
-		{ title: 'Careers', value: 'I am Careers' },
-		{ title: 'Contact Us', value: 'I am Contact Us' },
+		{ value: 'About Us', link: 'about-us' },
+		{ value: 'Careers', link: 'careers' },
+		{ value: 'Contact Us', link: 'contact-us' },
 	];
 	const legal = [
-		{ title: 'Privacy Policy', value: 'I am Privacy Policy' },
-		{ title: 'Terms of Services', value: 'I am Terms of Services' },
-		{ title: 'Refund Policy', value: 'I am Refund Policy' },
+		{ value: 'Privacy Policy', link: 'privacy-policy' },
+		{ value: 'Terms and Conditions', link: 'terms-and-conditions' },
+		{ value: 'Return & Refund Policy', link: 'refund-policy' },
 	];
+
 	const [isLessThan500] = useMediaQuery('(max-width: 500px)');
 
 	return (
@@ -137,19 +169,19 @@ export default function Footer() {
 					<Stack align={'flex-start'}>
 						<ListHeader>Product</ListHeader>
 						{product.map((it) => (
-							<ListItem key={it.title} title={it.title} value={it.value} />
+							<ListItem key={it.title} {...it} />
 						))}
 					</Stack>
 					<Stack align={'flex-start'}>
 						<ListHeader>Company</ListHeader>
 						{company.map((it) => (
-							<ListItem key={it.title} title={it.title} value={it.value} />
+							<ListItems key={it.value} {...it} />
 						))}
 					</Stack>
 					<Stack align={'flex-start'}>
 						<ListHeader>Legal</ListHeader>
-						{legal.map((it) => (
-							<ListItem key={it.title} title={it.title} value={it.value} />
+						{legal.map((li) => (
+							<ListItems key={li.value} {...li} />
 						))}
 					</Stack>
 					<Stack align={'flex-start'}>

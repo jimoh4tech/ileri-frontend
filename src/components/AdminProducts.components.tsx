@@ -57,8 +57,12 @@ function ProductPopOver({
 							price: item?.price || '',
 							imageUrl: item?.imageUrl || '',
 							category: item?.category || 'block',
+							deliveryValue: item?.deliveryValue || 1,
 						}}
-						onSubmit={(values) => handleSubmit(values)}
+						onSubmit={(values) => {
+							values.deliveryValue = Number(values.deliveryValue);
+							handleSubmit(values)
+						}}
 					>
 						{({ handleSubmit, isSubmitting, handleChange }) => (
 							<form onSubmit={handleSubmit}>
@@ -85,6 +89,20 @@ function ProductPopOver({
 												<option value='cement'>cement</option>
 												<option value='sand'>sand</option>
 												<option value='others'>others</option>
+											</Select>
+										</FormControl>
+
+										<FormControl id='deliveryValue' isRequired>
+											<FormLabel>Deivery Value</FormLabel>
+											<Select
+												name='deliveryValue'
+												defaultValue={item?.deliveryValue || 1}
+												onChange={handleChange}
+											>
+												<option value={1}>1</option>
+												<option value={2}>2</option>
+												<option value={3}>3</option>
+												<option value={4}>4</option>
 											</Select>
 										</FormControl>
 
@@ -142,7 +160,6 @@ function Product(itemProps: ItemAdmin) {
 				setMessage('');
 			}, 2000);
 		} catch (error: any) {
-			console.error(error);
 			setStatus('error');
 			const errMessage: string = error.response.data.error
 				? error.response.data.error
@@ -170,18 +187,19 @@ function Product(itemProps: ItemAdmin) {
 		}
 	}
 	async function handleDeleteItem() {
-		try {
-			setIsLoading(true);
-			const products = await productsService.deleteItem(item.id);
-			setProducts(products);
-			setIsLoading(false);
-		} catch (error: any) {
-			const errMessage: string = error.response.data.error
-				? error.response.data.error
-				: error.response.data;
-			alert(errMessage);
-			setIsLoading(false);
-		}
+		if (window.confirm('Are you sure you want to delete this product?'))
+			try {
+				setIsLoading(true);
+				const products = await productsService.deleteItem(item.id);
+				setProducts(products);
+				setIsLoading(false);
+			} catch (error: any) {
+				const errMessage: string = error.response.data.error
+					? error.response.data.error
+					: error.response.data;
+				alert(errMessage);
+				setIsLoading(false);
+			}
 	}
 	return (
 		<>
@@ -245,6 +263,7 @@ function AdminProducts() {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	async function fetchData() {
+
 		const data: ItemAdmin[] = await productsService.getAll();
 		setProducts(data);
 		return data;
@@ -262,7 +281,6 @@ function AdminProducts() {
 				setMessage('');
 			}, 2000);
 		} catch (error: any) {
-			console.error(error);
 			setStatus('error');
 			const errMessage: string = error.response.data.error
 				? error.response.data.error

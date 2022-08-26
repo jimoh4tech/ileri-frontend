@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { NewUser } from '../interfaces/user.interfaces';
 import { token } from './auth';
-const baseUrl = 'http://localhost:3111/api/v1/users';
+const baseUrl = '/api/v1/users';
 
 const createUser = async (user: NewUser) => {
 	const res = await axios.post(baseUrl, user);

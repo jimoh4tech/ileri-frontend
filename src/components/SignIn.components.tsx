@@ -40,7 +40,6 @@ function SignIn() {
 			if (window.location.pathname.includes('sign'))
 				navigate('/');
 		} catch (error: any) {
-			console.error(error);
 			setStatus('error');
 			const errMessage: string =
 				error.message === 'Network Error'
@@ -74,6 +73,7 @@ function SignIn() {
 						to continue <Link color={'teal.400'}>shopping</Link> ✌️
 					</Text>
 				</Stack>
+				
 				{message && <AlertComponent message={message} status={status} />}
 				<Box
 					rounded={'lg'}

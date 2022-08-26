@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { NewUser } from '../interfaces/user.interfaces';
-const baseUrl = 'http://localhost:3111/api/v1/auth';
+const baseUrl = '/api/v1/auth';
 
 export let token: string = '';
 

@@ -186,6 +186,14 @@ function Orders() {
 				</Text>
 			</Flex>
 		);
+	if (data.length === 0)
+		return (
+			<Flex minH={'300px'} justifyContent='center' alignItems='center'>
+				<Text fontWeight={'medium'}>
+					Opps! Order is empty. 
+				</Text>
+			</Flex>
+		);
 	return (
 		<Flex direction={'column'} p={2} gap={6}>
 			<Heading fontSize='2xl' fontWeight='extrabold' as={'h2'}>

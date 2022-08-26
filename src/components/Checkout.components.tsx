@@ -29,10 +29,19 @@ import ordersService from '../services/orders';
 import CheckoutOrderSummary from './CheckoutOrderSummary.components';
 
 const opt: any = {
-	Iba: [10, 30, 100],
-	Epe: [20, 50, 120],
-	Agege: [30, 70, 150],
-	surelere: [40, 100, 200],
+	'Iba Housing Estate': [10, 20, 30, 100, 100, 2000],
+	'Twins Faja': [10, 20, 30, 100, 100, 2000],
+	'Igbo Elerin': [20, 30, 50, 100, 150, 2500],
+	Agboroko: [20, 30, 50, 100, 150, 2500],
+	'Peace Estate': [20, 30, 50, 100, 150, 2500],
+	Ipaye: [20, 30, 50, 100, 150, 2500],
+	'Iyana School': [20, 30, 50, 100, 150, 2500],
+	'Iba Junction': [20, 30, 50, 100, 150, 2500],
+	Village: [20, 30, 50, 100, 150, 2500],
+	'Red Gate': [20, 30, 50, 100, 150, 2500],
+	LASU: [20, 30, 50, 100, 150, 2500],
+	'Post Service': [20, 30, 50, 100, 150, 2500],
+	Igando: [20, 30, 50, 100, 150, 2500],
 };
 
 function Options() {
@@ -55,7 +64,7 @@ function Checkout() {
 	const [orderDetails, setOrderDetails] = useState({
 		name: currentUser?.name,
 		address: '',
-		city: 'Iba',
+		city: 'Iba Housing Estate',
 		phone: currentUser?.phone,
 		user: currentUser?.id,
 		type: 'standard',
@@ -72,7 +81,7 @@ function Checkout() {
 	const reference = new Date().getTime().toString();
 
 	const config = {
-		email: 'olamide14044@gmail.com',
+		email: currentUser?.email || '',
 		amount: (subTotal + deliveryFee) * 100,
 		publicKey: process.env.REACT_APP_PAYSTACK_PUBLIC_KEY || '',
 	};
@@ -80,21 +89,25 @@ function Checkout() {
 	const initializePayment = usePaystackPayment({ ...config, reference });
 
 	async function createOrder() {
-		const total = subTotal + deliveryFee;
-		await ordersService.createOrder({
-			...orderDetails,
-			total,
-			paymentRef: reference,
-			items: []
-		});
-		alert('Thanks for patronizing us! We will contact you soon!!');
-		navigate('/');
-		setCurrentUser({ ...currentUser, cart: 0 });
+		try {
+			
+			const total = subTotal + deliveryFee;
+			await ordersService.createOrder({
+				...orderDetails,
+				total,
+				paymentRef: reference,
+				items: [],
+			});
+			alert('Thanks for patronizing us! We will contact you soon!!');
+			navigate('/');
+			setCurrentUser({ ...currentUser, cart: 0 });
+		} catch (error) {
+			alert('Toubled placing order? Kindly reach out to us.');
+		}
 	}
 	const onSuccess = () => createOrder();
 
 	const onClose = () => {
-		console.log('Closed');
 		alert('Need help to complete your order? kindly contact us.');
 	};
 	async function handleSubmit(e: any) {
@@ -102,7 +115,6 @@ function Checkout() {
 		try {
 			initializePayment(onSuccess, onClose);
 		} catch (error) {
-			console.error(error);
 			alert('Transaction failed! Check your internet connection.');
 		}
 	}
@@ -117,10 +129,15 @@ function Checkout() {
 	}
 
 	async function fetchData() {
-		const data: CartItemProps[] = await cartService.getCartItems();
-		const total = data.reduce((p, c) => p + c.price * c.quantity, 0);
-		setSubToal(total);
-		return data;
+		try {
+			
+			const data: CartItemProps[] = await cartService.getCartItems();
+			const total = data.reduce((p, c) => p + c.price * c.quantity, 0);
+			setSubToal(total);
+			return data;
+		} catch (error) {
+			alert('Error fetching cart items. Check your internet connection and try again')
+		}
 	}
 	useEffect(() => {
 		if (orderDetails.type === 'pickup') {
