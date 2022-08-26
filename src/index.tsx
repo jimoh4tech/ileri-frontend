@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { ChakraProvider } from '@chakra-ui/react';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { QueryClientProvider,  } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import client from './react-query-client';
@@ -15,9 +15,9 @@ root.render(
 		<QueryClientProvider client={client}>
 			<ReactQueryDevtools/>
 			<ChakraProvider>
-				<HashRouter>
+				<BrowserRouter>
 					<App />
-				</HashRouter>
+				</BrowserRouter>
 			</ChakraProvider>
 		</QueryClientProvider>
 	</React.StrictMode>
