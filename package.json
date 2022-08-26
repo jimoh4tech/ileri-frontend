@@ -1,5 +1,6 @@
 {
 	"name": "ileri-frontend",
+	"homepage": ".",
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
@@ -33,7 +34,6 @@
 		"eject": "react-scripts eject"
 	},
 	"proxy": "https://ileri-api.herokuapp.com",
-	"homepage": ".",
 	"eslintConfig": {
 		"extends": [
 			"react-app",
