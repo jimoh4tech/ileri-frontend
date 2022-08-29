@@ -1,9 +1,18 @@
-import { Heading, Stack, useMediaQuery } from '@chakra-ui/react';
+import {
+	Heading,
+	Stack,
+	useColorModeValue,
+	useMediaQuery,
+} from '@chakra-ui/react';
 
 function RefundPolicy() {
 	const [isLessThan500] = useMediaQuery('(max-width:500px)');
 	return (
-		<Stack p='5' gap={isLessThan500 ? 2 : 5}>
+		<Stack
+			p='5'
+			gap={isLessThan500 ? 2 : 5}
+			bg={useColorModeValue('white', 'gray.600')}
+		>
 			<Heading as={'h1'} fontSize={isLessThan500 ? 'xl' : '2xl'}>
 				Return and Refund Policy
 			</Heading>
@@ -11,12 +20,7 @@ function RefundPolicy() {
 			<p>Thank you for shopping at ILERI-OLUWA JIM-KAD.</p>
 			<p>
 				If, for any reason, You are not completely satisfied with a purchase We
-				invite You to review our policy on refunds and returns. This Return and
-				Refund Policy has been created with the help of the{' '}
-				<a href='https://www.privacypolicies.com/return-refund-policy-generator/'>
-					Return and Refund Policy Generator
-				</a>
-				.
+				invite You to review our policy on refunds and returns.
 			</p>
 			<p>
 				The following terms are applicable for any products that You purchased
@@ -93,13 +97,11 @@ function RefundPolicy() {
 				Your Order Cancellation Rights
 			</Heading>
 			<p>
-				You are entitled to cancel Your Order within 7 days without giving any
+				You are entitled to cancel Your Order while the status is still &quot;confirmed&quot; without giving any
 				reason for doing so.
 			</p>
 			<p>
-				The deadline for cancelling an Order is 7 days from the date on which
-				You received the Goods or on which a third party you have appointed, who
-				is not the carrier, takes possession of the product delivered.
+				The deadline for cancelling an Order is before the status changed to "Shipped" or "Delivered".
 			</p>
 			<p>
 				In order to exercise Your right of cancellation, You must inform Us of
@@ -130,8 +132,8 @@ function RefundPolicy() {
 				</ul>
 			</Stack>
 			<p>
-				We will reimburse You no later than 14 days from the day on which We
-				receive the returned Goods. We will use the same means of payment as You
+				We will reimburse You no later than 7 days from the day on which We
+				receive the cancellation request. We will use the same means of payment as You
 				used for the Order, and You will not incur any fees for such
 				reimbursement.
 			</p>
@@ -145,8 +147,7 @@ function RefundPolicy() {
 			<Stack px={10}>
 				<ul>
 					<Stack>
-						<li>The Goods were purchased in the last 7 days</li>
-						<li>The Goods are in the original packaging</li>
+						<li>The Goods were purchased status is still "confirmed"</li>
 					</Stack>
 				</ul>
 			</Stack>

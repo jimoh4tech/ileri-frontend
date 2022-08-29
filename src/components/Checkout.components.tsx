@@ -151,6 +151,7 @@ function Checkout() {
 				) || 0;
 			setDeliveryFee(dFee);
 		}
+		console.log('I am loded');
 	}, [orderDetails.city, orderDetails.type, userCart]);
 
 	return (

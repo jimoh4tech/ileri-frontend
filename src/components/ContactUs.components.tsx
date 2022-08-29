@@ -1,10 +1,14 @@
-import { Heading, ListItem, Stack, Text, UnorderedList, useMediaQuery } from "@chakra-ui/react";
+import { Heading, ListItem, Stack, Text, UnorderedList, useColorModeValue, useMediaQuery } from "@chakra-ui/react";
 import { Socials } from "./Footer.components";
 
 function ContactUs() {
   const [isLessThan500] = useMediaQuery('(max-width:500px)');
   return (
-		<Stack p='5' gap={isLessThan500 ? 2 : 5}>
+		<Stack
+			p='5'
+			gap={isLessThan500 ? 2 : 5}
+			bg={useColorModeValue('white', 'gray.600')}
+		>
 			<Heading as={'h1'} fontSize={isLessThan500 ? 'xl' : '2xl'}>
 				Contact Us
 			</Heading>

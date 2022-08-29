@@ -1,9 +1,18 @@
-import { Heading, Stack, useMediaQuery } from '@chakra-ui/react';
+import {
+	Heading,
+	Stack,
+	useColorModeValue,
+	useMediaQuery,
+} from '@chakra-ui/react';
 
 function TermsAndConditions() {
 	const [isLessThan500] = useMediaQuery('(max-width:500px)');
 	return (
-		<Stack p='5' gap={isLessThan500 ? 2 : 5}>
+		<Stack
+			p='5'
+			gap={isLessThan500 ? 2 : 5}
+			bg={useColorModeValue('white', 'gray.600')}
+		>
 			<Heading as={'h1'} fontSize={isLessThan500 ? 'xl' : '2xl'}>
 				Terms and Conditions
 			</Heading>

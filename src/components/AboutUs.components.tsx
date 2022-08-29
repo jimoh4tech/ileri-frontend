@@ -1,9 +1,13 @@
-import { Heading, Stack, Text, useMediaQuery } from '@chakra-ui/react';
+import { Heading, Stack, Text, useColorModeValue, useMediaQuery } from '@chakra-ui/react';
 
 function AboutUs() {
 	const [isLessThan500] = useMediaQuery('(max-width:500px)');
 	return (
-		<Stack p='5' gap={isLessThan500 ? 2 : 5}>
+		<Stack
+			p='5'
+			gap={isLessThan500 ? 2 : 5}
+			bg={useColorModeValue('white', 'gray.600')}
+		>
 			<Heading as={'h1'} fontSize={isLessThan500 ? 'xl' : '2xl'}>
 				About Us
 			</Heading>
@@ -17,8 +21,9 @@ function AboutUs() {
 			</Text>
 
 			<Text>
-				We currently own and operates in two sites and delivery building materials
-				like cement blocks, cements, sharp sand, plaster sand, granite, etc. {' '}
+				We currently own and operates in two sites and delivery building
+				materials like cement blocks, cements, sharp sand, plaster sand,
+				granite, etc.{' '}
 			</Text>
 
 			<Heading as={'h2'} fontSize={isLessThan500 ? 'md' : 'xl'}>
