@@ -23,7 +23,11 @@ const login = async ({
 	return res.data;
 };
 
-const changePassword = async (id:string, currentPassword: string, newPassword: string) => {
+const changePassword = async (
+	id: string,
+	currentPassword: string,
+	newPassword: string
+) => {
 	const res = await axios.put(
 		`${baseUrl}/${id}`,
 		{ currentPassword, newPassword },
@@ -32,7 +36,20 @@ const changePassword = async (id:string, currentPassword: string, newPassword: s
 		}
 	);
 	return res.data;
-}
+};
+
+const resetPassword = async (
+	userId: string,
+	token: string,
+	password: string
+) => {
+	const res = await axios.post(`${baseUrl}/resetPassword`, {
+		userId,
+		token,
+		password,
+	});
+	return res.data;
+};
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { changePassword, login, register, setToken };
+export default { changePassword, login, register, setToken, resetPassword };

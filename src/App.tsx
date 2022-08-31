@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import { Container } from '@chakra-ui/react';
 import Navbar from './components/Navbar.components';
@@ -13,6 +13,7 @@ import Checkout from './components/Checkout.components';
 import SignIn from './components/SignIn.components';
 import SignUp from './components/SignUp.component';
 import ForgetPassword from './components/ForgetPassword.components';
+import ResetPassword from './components/ResetPassword.components'
 import PageNotFound from './components/PageNotFound.components';
 import AdminNavbar from './components/AdminNavbar.components';
 import AdminFooter from './components/AdminFooter.components';
@@ -27,10 +28,21 @@ import RefundPolicy from './components/RefundPolicy.components';
 import AboutUs from './components/AboutUs.components';
 import ContactUs from './components/ContactUs.components';
 import Careers from './components/Careers.components';
+import authService from './services/auth';
 
 function App() {
 	const [filterText, setFilterText] = useState('');
 	const [currentUser, setCurrentUser] = useState<IUser | null>(null);
+	useEffect(() => {
+		async function autoLogin() {
+			const login = window.localStorage.getItem('ILERI_USER_LOGIN');
+			if (login) {
+				const credentials = await authService.login(JSON.parse(login));
+				setCurrentUser(credentials);
+			}
+		}
+		autoLogin();
+	}, [])
 	return (
 		<Container maxW={'1200px'} p={'10px'} bg='#F9F9F9'>
 			<CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
@@ -90,6 +102,7 @@ function App() {
 						<Route path='signin' element={<SignIn />} />
 						<Route path='signup' element={<SignUp />} />
 						<Route path='reset' element={<ForgetPassword />} />
+						<Route path='resetPassword' element={<ResetPassword />} />
 					</Route>
 					{/*Admin Routes*/}
 					<Route

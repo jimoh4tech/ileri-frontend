@@ -18,7 +18,7 @@ import {
 	useMediaQuery,
 } from '@chakra-ui/react';
 import { Field, Formik } from 'formik';
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
@@ -40,6 +40,10 @@ function SignUp() {
 	async function handleSubmit(values: any) {
 		try {
 			const user = await AuthService.register(values);
+			window.localStorage.setItem(
+				'ILERI_USER_LOGIN',
+				JSON.stringify({ email: values.email, password: values.password })
+			);
 			AuthService.setToken(user.token);
 			setCurrentUser(user);
 			setStatus('success');

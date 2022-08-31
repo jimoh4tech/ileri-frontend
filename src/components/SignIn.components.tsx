@@ -32,13 +32,13 @@ function SignIn() {
 
 	async function handleLogin(values: any) {
 		try {
+			window.localStorage.setItem('ILERI_USER_LOGIN', JSON.stringify(values));
 			const userObj = await AuthService.login(values);
 			setCurrentUser(userObj);
 			AuthService.setToken(userObj.token);
 			setStatus('success');
 			setMessage(`Welcome back`);
-			if (window.location.pathname.includes('sign'))
-				navigate('/');
+			if (window.location.pathname.includes('sign')) navigate('/');
 		} catch (error: any) {
 			setStatus('error');
 			const errMessage: string =
@@ -73,7 +73,7 @@ function SignIn() {
 						to continue <Link color={'teal.400'}>shopping</Link> ✌️
 					</Text>
 				</Stack>
-				
+
 				{message && <AlertComponent message={message} status={status} />}
 				<Box
 					rounded={'lg'}
