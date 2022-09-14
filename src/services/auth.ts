@@ -19,7 +19,10 @@ const login = async ({
 	email: string;
 	password: string;
 }) => {
-	const res = await axios.post(`${baseUrl}/login`, { email, password });
+	const res = await axios.post(`${baseUrl}/login`, {
+		email,
+		password,
+	});
 	return res.data;
 };
 
@@ -43,13 +46,34 @@ const resetPassword = async (
 	token: string,
 	password: string
 ) => {
-	const res = await axios.post(`${baseUrl}/resetPassword`, {
-		userId,
-		token,
-		password,
-	});
+	const res = await axios.post(
+		`${baseUrl}/resetPassword`,
+		{
+			userId,
+			token,
+			password,
+		}
+	);
+	return res.data;
+};
+const requestResetPassword = async (
+	email: string,
+) => {
+	const res = await axios.post(
+		`${baseUrl}/requestPasswordReset`,
+		{
+			email,
+		}
+	);
 	return res.data;
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { changePassword, login, register, setToken, resetPassword };
+export default {
+	changePassword,
+	login,
+	register,
+	setToken,
+	resetPassword,
+	requestResetPassword,
+};

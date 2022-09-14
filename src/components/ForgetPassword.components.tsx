@@ -11,11 +11,32 @@ import {
 	useColorModeValue,
 	useMediaQuery,
 } from '@chakra-ui/react';
+import { send } from '@emailjs/browser';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import authService from '../services/auth';
 
 function ForgetPassword() {
 	const navigate = useNavigate();
 	const [isLessThan500] = useMediaQuery('(max-width: 500px)');
+	const [email, setEmail] = useState('');
+
+	async function handleSubmit() {
+		try {
+			const res = await authService.requestResetPassword(email);
+			const data = {
+				email,
+				name: res.name,
+				link: res.link
+			};
+			console.log(res);
+			send('service_pu6csty', 'reset_password', data, 'W11P3bjKkWEJQess3')
+			alert(`Password reset link sent to ${email}!`);
+			setEmail('');
+		} catch (error) {
+			alert('Check your internet connection and try again!');
+		}
+	}
 	return (
 		<Flex
 			align={'center'}
@@ -30,7 +51,9 @@ function ForgetPassword() {
 				px={isLessThan500 ? 2 : 6}
 			>
 				<Stack align={'center'}>
-					<Heading fontSize={isLessThan500 ? '2xl' :'4xl'}>Forget your password?</Heading>
+					<Heading fontSize={isLessThan500 ? '2xl' : '4xl'}>
+						Forget your password?
+					</Heading>
 				</Stack>
 				<Box
 					rounded={'lg'}
@@ -50,6 +73,8 @@ function ForgetPassword() {
 								placeholder='your-email@example.com'
 								_placeholder={{ color: 'gray.500' }}
 								type='email'
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
 							/>
 						</FormControl>
 
@@ -59,6 +84,7 @@ function ForgetPassword() {
 							_hover={{
 								bg: 'teal.500',
 							}}
+							onClick={handleSubmit}
 						>
 							Request Reset
 						</Button>

@@ -102,11 +102,11 @@ function App() {
 						<Route path='signin' element={<SignIn />} />
 						<Route path='signup' element={<SignUp />} />
 						<Route path='reset' element={<ForgetPassword />} />
-						<Route path='resetPassword' element={<ResetPassword />} />
+						<Route path='passwordReset' element={<ResetPassword />} />
 					</Route>
 					{/*Admin Routes*/}
 					<Route
-						path='/secure/admin'
+						path='/admin'
 						element={
 							<>
 								<nav>

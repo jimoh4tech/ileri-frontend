@@ -5,6 +5,7 @@
 	"private": true,
 	"dependencies": {
 		"@chakra-ui/react": "^2.2.4",
+		"@emailjs/browser": "^3.7.0",
 		"@emotion/react": "^11.9.3",
 		"@emotion/styled": "^11.9.3",
 		"@testing-library/jest-dom": "^5.16.4",

@@ -35,6 +35,7 @@ function ResetPassword() {
 			const token = searchParams.get('token') || '';
 			const userId = searchParams.get('id') || '';
 			
+			
 			await authService.resetPassword(userId, token, newPassword);
 			alert('Password reset successful! Continue to signin.');
 			setTimeout(() => navigate('/signin'), 2000);

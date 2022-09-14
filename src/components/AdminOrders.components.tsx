@@ -235,8 +235,9 @@ function AdminOrders() {
 
 	async function fetchData() {
 		const data: OrderUI[] = await ordersService.getAllOrders();
-		setOrders(data);
-		return data;
+		const reverse = [...data].reverse();
+		setOrders(reverse);
+		return reverse;
 	}
 
 	if (isLoading)
