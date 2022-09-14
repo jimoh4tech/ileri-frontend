@@ -39,6 +39,7 @@ function App() {
 			if (login) {
 				const credentials = await authService.login(JSON.parse(login));
 				setCurrentUser(credentials);
+				authService.setToken(credentials.token);
 			}
 		}
 		autoLogin();

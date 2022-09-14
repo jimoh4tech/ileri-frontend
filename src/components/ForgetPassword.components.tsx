@@ -29,7 +29,6 @@ function ForgetPassword() {
 				name: res.name,
 				link: res.link
 			};
-			console.log(res);
 			send('service_pu6csty', 'reset_password', data, 'W11P3bjKkWEJQess3')
 			alert(`Password reset link sent to ${email}!`);
 			setEmail('');

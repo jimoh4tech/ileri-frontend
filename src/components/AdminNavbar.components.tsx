@@ -51,7 +51,7 @@ export default function AdminNavbar() {
 			setCurrentUser(null);
 			navigate('/');
 		} else {
-			navigate('/secure/admin');
+			navigate('/admin');
 		}
 	}
 	return (
@@ -66,7 +66,7 @@ export default function AdminNavbar() {
 						onClick={isOpen ? onClose : onOpen}
 					/>
 					<HStack spacing={8} alignItems={'center'}>
-						<Link maxW={'300px'} as={RouterLink} to='/secure/admin'>
+						<Link maxW={'300px'} as={RouterLink} to='/admin'>
 							<Image src={logo} alt='logo' />
 						</Link>
 						<HStack
