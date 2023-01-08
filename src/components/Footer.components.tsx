@@ -187,13 +187,22 @@ export default function Footer() {
 					<Stack align={'flex-start'}>
 						<ListHeader>Stay Connected</ListHeader>
 						<Stack direction={'row'} spacing={6}>
-							<SocialButton label={'Twitter'} href={'#'}>
+							<SocialButton
+								label={'Twitter'}
+								href={'https://twitter.com/abu4code'}
+							>
 								<FaTwitter />
 							</SocialButton>
-							<SocialButton label={'Facebook'} href={'#'}>
+							<SocialButton
+								label={'Facebook'}
+								href={'linkedin.com/in/abdul-quadri-jimoh-69369714a'}
+							>
 								<FaFacebook />
 							</SocialButton>
-							<SocialButton label={'Instagram'} href={'#'}>
+							<SocialButton
+								label={'Instagram'}
+								href={'https://www.instagram.com/ileri_oluwa_ventures/'}
+							>
 								<FaInstagram />
 							</SocialButton>
 						</Stack>
@@ -228,7 +237,7 @@ export default function Footer() {
 					fontSize={isLessThan500 ? '11px' : 'sm'}
 					textAlign={'center'}
 				>
-					© 2022 Ileri-Oluwa Jim-Kad Ventures. All rights reserved
+					© 2023 Ileri-Oluwa Jim-Kad Ventures. All rights reserved
 				</Text>
 			</Box>
 		</Box>

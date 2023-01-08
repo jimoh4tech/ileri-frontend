@@ -1,46 +1,65 @@
-# Getting Started with Create React App
+ILERI OLUWA ECOMMERCE
+===============
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was developed for a block industry Ecommerce website. You can find its coresponding Backend project [Here](https://github.com/Abu-Abdillah1/ileri-backend)
 
-## Available Scripts
 
-In the project directory, you can run:
+Overview
+----------------------------
+This is a responsive and fully functional ecommerce that enables users to play orders and debit their cards
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Screenshots
+----------------------------
+![Loading page](Screenshot1.png)
+![Load page](Screenshot2.png)
+![items](Screenshot3.png)
+![Footer page](Screenshot4.png)
+![Add to cart](Screenshot5.png)
+![checkout page](Screenshot6.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Technologies used
+----------------------------
 
-### `npm test`
+-   react.js (create-react-app)
+-   TypeScript
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Styling:
 
-### `npm run build`
+-   Chakra UI
+-   CSS
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Routing:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+-   react-router
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Payment processing:
 
-### `npm run eject`
+-   PayStack API
+### Others
+-   Formik
+-   React-query
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Hosting and server side functions
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+-   Vercel
+-   Render
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+[](https://github.com/Abu-Abdillah1/ileri-frontend.git)Links to source code and live site:
+-----------------------------------------------------------------------------------------------------------------------------
 
-## Learn More
+-   [Live site hosted on Vercel](https://ilerioluwa.vercel.app/)
+-   [Source code on Github](https://github.com/Abu-Abdillah1/ileri-frontend.git)
+-   [Backend API source code](https://github.com/Abu-Abdillah1/ileri-frontend.git)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Contribution
+----------------------------------------------------------------------------
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Anyone interested in the project can contribute to this repository. To do this, first fork the repository. Then make the changes in your repository. Finally, send a pull request to this repository.
+
+## Author
+Abu Abdillah olamide14044@gmail.com - [Twitter](https://twitter.com/abu4code) - [LinkedIn](linkedin.com/in/abdul-quadri-jimoh-69369714a)
+
+Copyright (c) 2022 Abu Abdillah https://github.com/Abu-Abdillah1/
+
