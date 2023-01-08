@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { token } from './auth';
 
-const baseUrl = 'https://ileri-api.herokuapp.com/api/v1/items';
+const baseUrl = 'https://ileri-api.onrender.com/api/v1/items';
 
 const createProduct = async (data: any) => {
 	const res = await axios.post(baseUrl, data, {

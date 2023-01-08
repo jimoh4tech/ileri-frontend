@@ -3,7 +3,7 @@ import { NewCartItem } from '../interfaces/cart.interfaces';
 import { CartItemProps } from '../interfaces/item.interfaces';
 import { token } from './auth';
 
-const baseUrl = 'https://ileri-api.herokuapp.com/api/v1/carts';
+const baseUrl = 'https://ileri-api.onrender.com/api/v1/carts';
 
 const addItemToCart = async (item: NewCartItem) => {
 	const res = await axios.post(baseUrl, item, {

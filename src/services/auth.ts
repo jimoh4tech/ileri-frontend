@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { NewUser } from '../interfaces/user.interfaces';
-const baseUrl = 'https://ileri-api.herokuapp.com/api/v1/auth';
+const baseUrl = 'https://ileri-api.onrender.com/api/v1/auth';
 
 export let token: string = '';
 

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { OrderUI } from '../interfaces/order.interfaces';
 import { token } from './auth';
 
-const baseUrl = 'https://ileri-api.herokuapp.com/api/v1/orders';
+const baseUrl = 'https://ileri-api.onrender.com/api/v1/orders';
 
 const createOrder = async (order: OrderUI) => {
 	const res = await axios.post(baseUrl, order, {
